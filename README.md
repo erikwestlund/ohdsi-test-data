@@ -21,7 +21,7 @@ git clone https://github.com/erikwestlund/ohdsi-test-data`
 The data will now be located at `$HOME/ohdsi-test-data/cdm.sqlite` where `$HOME`
 is the user's home directory.
 
-# Set up a PostgreSQL database.
+## Set up a PostgreSQL database.
 
 1. cd to repo `cd $HOME/ohdsi-test-data`
 2. Configure Postgres instance by running `bash configure-postgres.sh`
