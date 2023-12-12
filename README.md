@@ -1,11 +1,8 @@
 # Set up a PostgreSQL database with OHDSI test data.
 
-Requirements:
+Requirements for PostgreSQL:
 
-* For SQLite, simply use the "cdm.sqlite" file generated from the fetch-data
-command
-* For PostgreSQL, need a PGSQL instance and pgloader on the machine running
-this code, a database, and credentials to connect to that database.
+An Ubuntu 22.04 instance.
 
 ## Clone the repository
 
