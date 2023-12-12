@@ -23,4 +23,4 @@ sudo -u postgres psql -f schema/indices.sql
 # guidance by Chris Knoll, here:
 # https://forums.ohdsi.org/t/standard-cdm-database-for-testing-demonstrating/6031/23
 
-sudo -u postgres -f load-data.sql
+sudo -u postgres psql -f load-data.sql
