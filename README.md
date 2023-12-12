@@ -1,4 +1,4 @@
-# Set up a PostgreSQL database with OHDSI test data.
+# Set up a PostgreSQL database with ODHSI test data.
 
 Requirements for PostgreSQL:
 
