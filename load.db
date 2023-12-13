@@ -1,6 +1,10 @@
 LOAD DATABASE
   FROM sqlite:///home/erik/ohdsi-test-data/cdm.sqlite
-  INTO pgsql://ohdsi:ohdsi@192.168.1.195/postgres
+  INTO pgsql://ohdsi:ohdsi@localhost/postgres
   INCLUDING ONLY TABLE NAMES LIKE 'CDM_SOURCE'
 
- WITH data only;
+ WITH data only
+
+ CAST
+   type real to timestamptz using unix-timestamp-to-timestamptz;
+

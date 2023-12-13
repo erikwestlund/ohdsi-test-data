@@ -9,6 +9,8 @@ sudo -u postgres psql -f sql/schema/constraints.sql;
 sudo -u postgres psql -f sql/schema/indices.sql;
 sudo -u postgres psql -f sql/set-ohdsi-role-permissions.sql # Must reset permissions now that tables are created.
 
+pgloader db.load
+
 # \ir data/schema/ddl.sql;
 # \ir data/schema/keys.sql;
 # \ir data/schema/constraints.sql;
