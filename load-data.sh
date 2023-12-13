@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 sudo -u postgres psql -f sql/create-ohdsi-role.sql
+sudo -u postgres psql -f sql/create-schema.sql
 sudo -u postgres psql -f sql/set-ohdsi-role-permissions.sql
 sudo -u postgres psql -f sql/schema/ddl.sql;
 sudo -u postgres psql -f sql/schema/keys.sql;
