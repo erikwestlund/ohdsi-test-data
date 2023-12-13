@@ -1,0 +1,1 @@
+CREATE USER ohdsi WITH PASSWORD 'ohdsi';

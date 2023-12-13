@@ -25,6 +25,6 @@ is the user's home directory.
 
 1. cd to repo `cd $HOME/ohdsi-test-data`
 2. Configure PostgreSQL instance and install other necessary tooling by running `bash configure-env.sh`
-3. Fetch the DDLs and fixture data and prepare for loading: `bash preapre-data.sh`
+3. Fetch the DDLs and fixture data and prepare for loading: `bash prepare-data.sh`
 4. load the data `bash load-data.sh`
 

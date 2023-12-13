@@ -2,7 +2,11 @@ CREATE USER ohdsi WITH PASSWORD 'ohdsi';
 CREATE SCHEMA IF NOT EXISTS cdm;
 CREATE SCHEMA IF NOT EXISTS scratch;
 
-GRANT CONNECT ON DATABASE postgres TO ohdsi;
-GRANT USAGE ON SCHEMA cdm, scratch TO ohdsi;
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA cdm, scratch TO ohdsi;
-GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA cdm, scratch TO ohdsi;
+
+\ir data/schema/ddl.sql;
+\ir data/schema/keys.sql;
+\ir data/schema/constraints.sql;
+\ir data/schema/indices.sql;
+
+
+

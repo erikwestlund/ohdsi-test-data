@@ -1,26 +1,27 @@
 #!/usr/bin/env bash
 
-mkdir -p schema
+sudo -u postgres psql -f sql/create-ohdsi-role.sql
+sudo -u postgres psql -f sql/set-ohdsi-role-permissions.sql
+sudo -u postgres psql -f sql/schema/ddl.sql;
+sudo -u postgres psql -f sql/schema/keys.sql;
+sudo -u postgres psql -f sql/schema/constraints.sql;
+sudo -u postgres psql -f sql/schema/indices.sql;
+sudo -u postgres psql -f sql/set-ohdsi-role-permissions.sql # Must reset permissions now that tables are created.
 
-# Fetch and load the schema
-cp CommonDataModel/inst/ddl/5.4/postgresql/OMOPCDM_postgresql_5.4_ddl.sql schema/ddl.sql
-sed -i "s/@cdmDatabaseSchema/cdm/g" schema/ddl.sql
-sudo -u postgres psql -f schema/ddl.sql
+# \ir data/schema/ddl.sql;
+# \ir data/schema/keys.sql;
+# \ir data/schema/constraints.sql;
+# \ir data/schema/indices.sql;
 
-cp CommonDataModel/inst/ddl/5.4/postgresql/OMOPCDM_postgresql_5.4_primary_keys.sql schema/keys.sql
-sed -i "s/@cdmDatabaseSchema/cdm/g" schema/keys.sql
-sudo -u postgres psql -f schema/keys.sql
-
-cp CommonDataModel/inst/ddl/5.4/postgresql/OMOPCDM_postgresql_5.4_constraints.sql schema/constraints.sql
-sed -i "s/@cdmDatabaseSchema/cdm/g" schema/constraints.sql
-sudo -u postgres psql -f schema/constraints.sql
-
-cp CommonDataModel/inst/ddl/5.4/postgresql/OMOPCDM_postgresql_5.4_indices.sql schema/indices.sql
-sed -i "s/@cdmDatabaseSchema/cdm/g" schema/indices.sql
-sudo -u postgres psql -f schema/indices.sql
 
 # Now load the Eunomia data, which we have copied into CSV files, following
 # guidance by Chris Knoll, here:
 # https://forums.ohdsi.org/t/standard-cdm-database-for-testing-demonstrating/6031/23
 
+pgloader sqlite:///home/$USER/cdm.sqlite pgsql://ohdsi:ohdsi@localhost/cdm
+
+
 sudo -u postgres psql -f load-data.sql
+
+sudo -u postgres psql -c "COPY cdm.CDM_SOURCE FROM '$HOME/ohdsi-test-data/data/eunomia/CDM_SOURCE.csv' DELIMITER ',' CSV HEADER NULL AS '';"
+COPY cdm.CDM_SOURCE FROM 'data/eunomia/CDM_SOURCE.csv' DELIMITER ',' CSV HEADER NULL AS '';
