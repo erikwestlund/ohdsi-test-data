@@ -1,0 +1,27 @@
+LOAD CSV
+   FROM 'data/eunomia/CONDITION_ERA.csv'
+   HAVING FIELDS (
+    CONDITION_ERA_ID,
+    PERSON_ID,
+    CONDITION_CONCEPT_ID,
+    CONDITION_ERA_START_DATE,
+    CONDITION_ERA_END_DATE,
+    CONDITION_OCCURRENCE_COUNT
+   )
+
+   INTO pgsql://ohdsi:ohdsi@localhost/postgres
+        TARGET TABLE cdm.CONDITION_ERA
+        TARGET COLUMNS (
+          CONDITION_ERA_ID,
+          PERSON_ID,
+          CONDITION_CONCEPT_ID,
+          CONDITION_ERA_START_DATE  timestamp using (zero-dates-to-null (unix-timestamp-to-timestamptz CONDITION_ERA_START_DATE)),
+          CONDITION_ERA_END_DATE timestamp using (zero-dates-to-null (unix-timestamp-to-timestamptz CONDITION_ERA_END_DATE)),
+          CONDITION_OCCURRENCE_COUNT
+        )
+   WITH skip header = 1,
+        fields optionally enclosed by '"',
+        fields escaped by backslash-quote,
+        fields terminated by ','
+
+    SET work_mem to '32 MB', maintenance_work_mem to '64 MB';

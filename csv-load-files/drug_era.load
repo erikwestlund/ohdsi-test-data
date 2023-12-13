@@ -1,0 +1,29 @@
+LOAD CSV
+   FROM 'data/eunomia/DRUG_ERA.csv'
+   HAVING FIELDS (
+    DRUG_ERA_ID,
+    PERSON_ID,
+    DRUG_CONCEPT_ID,
+    DRUG_ERA_START_DATE,
+    DRUG_ERA_END_DATE,
+    DRUG_EXPOSURE_COUNT,
+    GAP_DAYS
+   )
+
+   INTO pgsql://ohdsi:ohdsi@localhost/postgres
+        TARGET TABLE cdm.DRUG_ERA
+        TARGET COLUMNS (
+          DRUG_ERA_ID,
+          PERSON_ID,
+          DRUG_CONCEPT_ID,
+          DRUG_ERA_START_DATE timestamp using (zero-dates-to-null (unix-timestamp-to-timestamptz DRUG_ERA_START_DATE)),
+          DRUG_ERA_END_DATE timestamp using (zero-dates-to-null (unix-timestamp-to-timestamptz DRUG_ERA_END_DATE)),
+          DRUG_EXPOSURE_COUNT,
+          GAP_DAYS
+        )
+   WITH skip header = 1,
+        fields optionally enclosed by '"',
+        fields escaped by backslash-quote,
+        fields terminated by ','
+
+    SET work_mem to '32 MB', maintenance_work_mem to '64 MB';

@@ -1,0 +1,21 @@
+LOAD CSV
+   FROM 'data/eunomia/DOMAIN.csv'
+   HAVING FIELDS (
+    DOMAIN_ID,
+    DOMAIN_NAME,
+    DOMAIN_CONCEPT_ID
+   )
+
+   INTO pgsql://ohdsi:ohdsi@localhost/postgres
+        TARGET TABLE cdm.DOMAIN
+        TARGET COLUMNS (
+          DOMAIN_ID,
+          DOMAIN_NAME,
+          DOMAIN_CONCEPT_ID
+        )
+   WITH skip header = 1,
+        fields optionally enclosed by '"',
+        fields escaped by backslash-quote,
+        fields terminated by ','
+
+    SET work_mem to '32 MB', maintenance_work_mem to '64 MB';

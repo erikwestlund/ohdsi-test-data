@@ -1,0 +1,23 @@
+LOAD CSV
+   FROM 'data/eunomia/CONCEPT_ANCESTOR.csv'
+   HAVING FIELDS (
+    ANCESTOR_CONCEPT_ID,
+    DESCENDANT_CONCEPT_ID,
+    MIN_LEVELS_OF_SEPARATION,
+    MAX_LEVELS_OF_SEPARATION
+   )
+
+   INTO pgsql://ohdsi:ohdsi@localhost/postgres
+        TARGET TABLE cdm.CONCEPT_ANCESTOR
+        TARGET COLUMNS (
+          ANCESTOR_CONCEPT_ID,
+          DESCENDANT_CONCEPT_ID,
+          MIN_LEVELS_OF_SEPARATION,
+          MAX_LEVELS_OF_SEPARATION
+        )
+   WITH skip header = 1,
+        fields optionally enclosed by '"',
+        fields escaped by backslash-quote,
+        fields terminated by ','
+
+    SET work_mem to '32 MB', maintenance_work_mem to '64 MB';

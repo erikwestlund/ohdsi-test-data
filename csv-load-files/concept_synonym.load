@@ -1,0 +1,21 @@
+LOAD CSV
+   FROM 'data/eunomia/CONCEPT_SYNONYM.csv'
+   HAVING FIELDS (
+    CONCEPT_ID,
+    CONCEPT_SYNONYM_NAME,
+    LANGUAGE_CONCEPT_ID
+   )
+
+   INTO pgsql://ohdsi:ohdsi@localhost/postgres
+        TARGET TABLE cdm.CONCEPT_SYNONYM
+        TARGET COLUMNS (
+          CONCEPT_ID,
+          CONCEPT_SYNONYM_NAME,
+          LANGUAGE_CONCEPT_ID
+        )
+   WITH skip header = 1,
+        fields optionally enclosed by '"',
+        fields escaped by backslash-quote,
+        fields terminated by ','
+
+    SET work_mem to '32 MB', maintenance_work_mem to '64 MB';

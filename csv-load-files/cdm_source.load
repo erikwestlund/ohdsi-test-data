@@ -1,0 +1,35 @@
+LOAD CSV
+   FROM 'data/eunomia/CDM_SOURCE.csv'
+   HAVING FIELDS (
+     CDM_SOURCE_NAME,
+     CDM_SOURCE_ABBREVIATION,
+     CDM_HOLDER,
+     SOURCE_DESCRIPTION,
+     SOURCE_DOCUMENTATION_REFERENCE,
+     CDM_ETL_REFERENCE,
+     SOURCE_RELEASE_DATE,
+     CDM_RELEASE_DATE,
+     CDM_VERSION,
+     VOCABULARY_VERSION
+   )
+
+   INTO pgsql://ohdsi:ohdsi@localhost/postgres
+        TARGET TABLE cdm.CDM_SOURCE
+        TARGET COLUMNS (
+          CDM_SOURCE_NAME,
+          CDM_SOURCE_ABBREVIATION,
+          CDM_HOLDER,
+          SOURCE_DESCRIPTION,
+          SOURCE_DOCUMENTATION_REFERENCE,
+          CDM_ETL_REFERENCE,
+          SOURCE_RELEASE_DATE timestamp using (unix-timestamp-to-timestamptz SOURCE_RELEASE_DATE),
+          CDM_RELEASE_DATE timestamp using (unix-timestamp-to-timestamptz CDM_RELEASE_DATE),
+          CDM_VERSION,
+          VOCABULARY_VERSION
+        )
+   WITH skip header = 1,
+        fields optionally enclosed by '"',
+        fields escaped by backslash-quote,
+        fields terminated by ','
+
+    SET work_mem to '32 MB', maintenance_work_mem to '64 MB';

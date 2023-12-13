@@ -1,0 +1,35 @@
+LOAD CSV
+   FROM 'data/eunomia/CONCEPT.csv'
+   HAVING FIELDS (
+    CONCEPT_ID,
+    CONCEPT_NAME,
+    DOMAIN_ID,
+    VOCABULARY_ID,
+    CONCEPT_CLASS_ID,
+    STANDARD_CONCEPT,
+    CONCEPT_CODE,
+    VALID_START_DATE,
+    VALID_END_DATE,
+    INVALID_REASON
+   )
+
+   INTO pgsql://ohdsi:ohdsi@localhost/postgres
+        TARGET TABLE cdm.CONCEPT
+        TARGET COLUMNS (
+          CONCEPT_ID,
+          CONCEPT_NAME,
+          DOMAIN_ID,
+          VOCABULARY_ID,
+          CONCEPT_CLASS_ID,
+          STANDARD_CONCEPT,
+          CONCEPT_CODE,
+          VALID_START_DATE timestamp using (zero-dates-to-null (unix-timestamp-to-timestamptz VALID_START_DATE)),
+          VALID_END_DATE timestamp using (zero-dates-to-null (unix-timestamp-to-timestamptz VALID_END_DATE)),
+          INVALID_REASON
+        )
+   WITH skip header = 1,
+        fields optionally enclosed by '"',
+        fields escaped by backslash-quote,
+        fields terminated by ','
+
+    SET work_mem to '32 MB', maintenance_work_mem to '64 MB';
