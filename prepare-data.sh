@@ -34,7 +34,7 @@ sqlite3 -header -csv cdm.sqlite "select
 from CDM_SOURCE;" > data/eunomia/CDM_SOURCE.csv
 
 # CONCEPT
-# Requires a patch for data integirity
+# Requires a patch for data integrity if to meet constraints. Not applying for now.
 sqlite3 -header -csv cdm.sqlite "select
   cast(CONCEPT_ID as integer) as CONCEPT_ID,
   CONCEPT_NAME,
@@ -105,7 +105,7 @@ sqlite3 -header -csv cdm.sqlite "select
 from CONDITION_OCCURRENCE;" > data/eunomia/CONDITION_OCCURRENCE.csv
 
 # DOMAIN
-# Requires a patch for data integirity
+# Requires a patch for data integrity if to meet constraints. Not applying for now.
 sqlite3 -header -csv cdm.sqlite "select
   DOMAIN_ID,
   DOMAIN_NAME,
@@ -210,7 +210,7 @@ sqlite3 -header -csv cdm.sqlite "select
 from OBSERVATION_PERIOD;" > data/eunomia/OBSERVATION_PERIOD.csv
 
 # PERSON
-# Requires a patch for data integirity
+# Requires a patch for data integrity if to meet constraints. Not applying for now.
 sqlite3 -header -csv cdm.sqlite "select
   cast(PERSON_ID as integer) as PERSON_ID,
   cast(GENDER_CONCEPT_ID as integer) as GENDER_CONCEPT_ID,
