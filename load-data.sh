@@ -37,7 +37,7 @@ sudo -u postgres psql -f sql/schema/keys.sql;
 # We patch some files to maintain integrity, but we will for now delete constraints
 # where not enough test data is provided to meet the constraints, for example
 # references to visit details
-awk '!/visit_occurence_id/' sql/schema/constraints.sql > temp && mv temp sql/schema/constraints.sql
+awk '!/visit_occurrence_id/' sql/schema/constraints.sql > temp && mv temp sql/schema/constraints.sql
 awk '!/visit_detail_id/' sql/schema/constraints.sql > temp && mv temp sql/schema/constraints.sql
 awk '!/provider/' sql/schema/constraints.sql > temp && mv temp sql/schema/constraints.sql
 
