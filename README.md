@@ -1,4 +1,4 @@
-# Set Up a Dispoable PostgreSQL Database with OMOP CDM Test Data  🚀→🧨→🚀→🧨
+# Set Up a Dispoable PostgreSQL Database with OMOP CDM Test Data  🚀🧨🚀🧨🚀
 
 Requirements: An Ubuntu server. (Tested with 22.04, should work with past releases.)
 
