@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 
+# Make sure this is only run from within the directory.
+if [[ ! -f .in-root ]] ; then
+    echo 'You must run this command from within the repository root. Escaping.'
+    exit
+fi
+
 # Pull repositories with useful data.
+rm -rf remote
+rm -rf data
 git clone https://github.com/OHDSI/CommonDataModel remote/CommonDataModel
 git clone https://github.com/OHDSI/Eunomia remote/Eunomia
 
@@ -9,6 +17,7 @@ tar -xvf remote/Eunomia/inst/sqlite/cdm.tar.xz
 
 # Get and prepare the schema for CDM 5.3
 mkdir -p sql/schema
+mkdir -p data/eunomia
 
 # CDM_SOURCE
 sqlite3 -header -csv cdm.sqlite "select
