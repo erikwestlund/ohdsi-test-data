@@ -123,7 +123,7 @@ from DRUG_ERA;" > data/eunomia/DRUG_ERA.csv
 # DRUG_EXPOSURE
 #   Eunomia has duplicates so group on DRUG_EXPOSURE_ID
 sqlite3 -header -csv cdm.sqlite "select
-  cast(DRUG_EXPOSURE_ID as integer) as DRUG_EXPOSURE_ID,
+  cast(min(DRUG_EXPOSURE_ID) as integer) as DRUG_EXPOSURE_ID,
   cast(PERSON_ID as integer) as PERSON_ID,
   cast(DRUG_CONCEPT_ID as integer) as DRUG_CONCEPT_ID,
   cast(DRUG_EXPOSURE_START_DATE as integer) as DRUG_EXPOSURE_START_DATE,
@@ -151,7 +151,7 @@ from DRUG_EXPOSURE group by DRUG_EXPOSURE_ID;" > data/eunomia/DRUG_EXPOSURE.csv
 # MEASUREMENT
 #   Eunomia has duplicates so group on MEASUREMENT_ID
 sqlite3 -header -csv cdm.sqlite "select
-  cast(MEASUREMENT_ID as integer) as MEASUREMENT_ID,
+  cast(min(MEASUREMENT_ID) as integer) as MEASUREMENT_ID,
   cast(PERSON_ID as integer) as PERSON_ID,
   cast(MEASUREMENT_CONCEPT_ID as integer) as MEASUREMENT_CONCEPT_ID,
   cast(MEASUREMENT_DATE as integer) as MEASUREMENT_DATE,
@@ -176,7 +176,7 @@ from MEASUREMENT group by MEASUREMENT_ID;" > data/eunomia/MEASUREMENT.csv
 # OBSERVATION
 #   Eunomia has duplicates so group on OBSERVATION_ID
 sqlite3 -header -csv cdm.sqlite "select
-  cast(OBSERVATION_ID as integer) as OBSERVATION_ID,
+  cast(min(OBSERVATION_ID) as integer) as OBSERVATION_ID,
   cast(PERSON_ID as integer) as PERSON_ID,
   cast(OBSERVATION_CONCEPT_ID as integer) as OBSERVATION_CONCEPT_ID,
   cast(OBSERVATION_DATE as integer) as OBSERVATION_DATE,
