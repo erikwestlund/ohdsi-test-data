@@ -31,6 +31,6 @@ is the user's home directory.
 
 ## Next Steps
 
-Include steps to load Synpuf data
-Support OMOP CDM 5.2, 5.4
-Reach goal: Make it easy to load as little or as much Synthea data as you want.
+* Include steps to load Synpuf data
+* Support OMOP CDM 5.2, 5.4
+* Reach goal: Make it easy to load as little or as much Synthea data as you want.
