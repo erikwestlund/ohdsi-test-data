@@ -47,7 +47,7 @@ sqlite3 -header -csv cdm.sqlite "select
   cast(VALID_END_DATE as integer) as VALID_END_DATE,
   INVALID_REASON
 from CONCEPT;" > data/eunomia/CONCEPT.csv
-cat patches/concept.csv >> data/eunomia/CONCEPT.csv
+# cat patches/concept.csv >> data/eunomia/CONCEPT.csv
 
 # CONCEPT_ANCESTOR
 sqlite3 -header -csv cdm.sqlite "select
@@ -111,7 +111,7 @@ sqlite3 -header -csv cdm.sqlite "select
   DOMAIN_NAME,
   cast(DOMAIN_CONCEPT_ID as integer) as DOMAIN_CONCEPT_ID
 from DOMAIN;" > data/eunomia/DOMAIN.csv
-cat patches/domain.csv >> data/eunomia/DOMAIN.csv
+# cat patches/domain.csv >> data/eunomia/DOMAIN.csv
 
 # DRUG_ERA
 sqlite3 -header -csv cdm.sqlite "select
@@ -231,7 +231,7 @@ sqlite3 -header -csv cdm.sqlite "select
   ETHNICITY_SOURCE_VALUE,
   cast(ETHNICITY_SOURCE_CONCEPT_ID as integer) as ETHNICITY_SOURCE_CONCEPT_ID
 from PERSON;" > data/eunomia/PERSON.csv
-cat patches/person.csv >> data/eunomia/PERSON.csv
+# cat patches/person.csv >> data/eunomia/PERSON.csv
 
 # PROCEDURE_OCCURENCE
 sqlite3 -header -csv cdm.sqlite "select
