@@ -1,0 +1,55 @@
+LOAD CSV
+   FROM 'data/eunomia/MEASUREMENT.csv'
+   HAVING FIELDS (
+     MEASUREMENT_ID,
+     PERSON_ID,
+     MEASUREMENT_CONCEPT_ID,
+     MEASUREMENT_DATE,
+     MEASUREMENT_DATETIME,
+     MEASUREMENT_TIME,
+     MEASUREMENT_TYPE_CONCEPT_ID,
+     OPERATOR_CONCEPT_ID,
+     VALUE_AS_NUMBER,
+     VALUE_AS_CONCEPT_ID,
+     UNIT_CONCEPT_ID,
+     RANGE_LOW,
+     RANGE_HIGH,
+     PROVIDER_ID,
+     VISIT_OCCURRENCE_ID,
+     VISIT_DETAIL_ID,
+     MEASUREMENT_SOURCE_VALUE,
+     MEASUREMENT_SOURCE_CONCEPT_ID,
+     UNIT_SOURCE_VALUE,
+     VALUE_SOURCE_VALUE
+   )
+
+   INTO pgsql://ohdsi:ohdsi@localhost/postgres
+        TARGET TABLE cdm.MEASUREMENT
+        TARGET COLUMNS (
+           MEASUREMENT_ID,
+           PERSON_ID,
+           MEASUREMENT_CONCEPT_ID,
+           MEASUREMENT_DATE timestamp using (zero-dates-to-null (unix-timestamp-to-timestamptz MEASUREMENT_DATE)),
+           MEASUREMENT_DATETIME timestamp using (zero-dates-to-null (unix-timestamp-to-timestamptz MEASUREMENT_DATETIME)),
+           MEASUREMENT_TIME,
+           MEASUREMENT_TYPE_CONCEPT_ID,
+           OPERATOR_CONCEPT_ID,
+           VALUE_AS_NUMBER,
+           VALUE_AS_CONCEPT_ID,
+           UNIT_CONCEPT_ID,
+           RANGE_LOW,
+           RANGE_HIGH,
+           PROVIDER_ID,
+           VISIT_OCCURRENCE_ID,
+           VISIT_DETAIL_ID,
+           MEASUREMENT_SOURCE_VALUE,
+           MEASUREMENT_SOURCE_CONCEPT_ID,
+           UNIT_SOURCE_VALUE,
+           VALUE_SOURCE_VALUE
+        )
+   WITH skip header = 1,
+        fields optionally enclosed by '"',
+        fields escaped by backslash-quote,
+        fields terminated by ','
+
+    SET work_mem to '32 MB', maintenance_work_mem to '64 MB';

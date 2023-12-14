@@ -1,0 +1,49 @@
+LOAD CSV
+   FROM 'data/eunomia/VISIT_OCCURRENCE.csv'
+   HAVING FIELDS (
+    VISIT_OCCURRENCE_ID,
+    PERSON_ID,
+    VISIT_CONCEPT_ID,
+    VISIT_START_DATE,
+    VISIT_START_DATETIME,
+    VISIT_END_DATE,
+    VISIT_END_DATETIME,
+    VISIT_TYPE_CONCEPT_ID,
+    PROVIDER_ID,
+    CARE_SITE_ID,
+    VISIT_SOURCE_VALUE,
+    VISIT_SOURCE_CONCEPT_ID,
+    ADMITTING_SOURCE_CONCEPT_ID,
+    ADMITTING_SOURCE_VALUE,
+    DISCHARGE_TO_CONCEPT_ID,
+    DISCHARGE_TO_SOURCE_VALUE,
+    PRECEDING_VISIT_OCCURRENCE_ID
+   )
+
+   INTO pgsql://ohdsi:ohdsi@localhost/postgres
+        TARGET TABLE cdm.VISIT_OCCURRENCE
+        TARGET COLUMNS (
+          VISIT_OCCURRENCE_ID,
+          PERSON_ID,
+          VISIT_CONCEPT_ID,
+          VISIT_START_DATE timestamp using (zero-dates-to-null (unix-timestamp-to-timestamptz VISIT_START_DATE)),
+          VISIT_START_DATETIME timestamp using (zero-dates-to-null (unix-timestamp-to-timestamptz VISIT_START_DATETIME)),
+          VISIT_END_DATE timestamp using (zero-dates-to-null (unix-timestamp-to-timestamptz VISIT_END_DATE)),
+          VISIT_END_DATETIME timestamp using (zero-dates-to-null (unix-timestamp-to-timestamptz VISIT_END_DATETIME)),
+          VISIT_TYPE_CONCEPT_ID,
+          PROVIDER_ID,
+          CARE_SITE_ID,
+          VISIT_SOURCE_VALUE,
+          VISIT_SOURCE_CONCEPT_ID,
+          ADMITTING_SOURCE_CONCEPT_ID,
+          ADMITTING_SOURCE_VALUE,
+          DISCHARGE_TO_CONCEPT_ID,
+          DISCHARGE_TO_SOURCE_VALUE,
+          PRECEDING_VISIT_OCCURRENCE_ID
+        )
+   WITH skip header = 1,
+        fields optionally enclosed by '"',
+        fields escaped by backslash-quote,
+        fields terminated by ','
+
+    SET work_mem to '32 MB', maintenance_work_mem to '64 MB';

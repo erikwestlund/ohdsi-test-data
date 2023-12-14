@@ -1,2 +1,4 @@
 cdm.sqlite
 remote/*
+data/*
+sql/schema*

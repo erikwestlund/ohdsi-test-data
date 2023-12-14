@@ -1,0 +1,51 @@
+LOAD CSV
+   FROM 'data/eunomia/PERSON.csv'
+   HAVING FIELDS (
+    PERSON_ID,
+    GENDER_CONCEPT_ID,
+    YEAR_OF_BIRTH,
+    MONTH_OF_BIRTH,
+    DAY_OF_BIRTH,
+    BIRTH_DATETIME,
+    RACE_CONCEPT_ID,
+    ETHNICITY_CONCEPT_ID,
+    LOCATION_ID,
+    PROVIDER_ID,
+    CARE_SITE_ID,
+    PERSON_SOURCE_VALUE,
+    GENDER_SOURCE_VALUE,
+    GENDER_SOURCE_CONCEPT_ID,
+    RACE_SOURCE_VALUE,
+    RACE_SOURCE_CONCEPT_ID,
+    ETHNICITY_SOURCE_VALUE,
+    ETHNICITY_SOURCE_CONCEPT_ID
+   )
+
+   INTO pgsql://ohdsi:ohdsi@localhost/postgres
+        TARGET TABLE cdm.PERSON
+        TARGET COLUMNS (
+          PERSON_ID,
+          GENDER_CONCEPT_ID,
+          YEAR_OF_BIRTH,
+          MONTH_OF_BIRTH,
+          DAY_OF_BIRTH,
+          BIRTH_DATETIME timestamp using (zero-dates-to-null (unix-timestamp-to-timestamptz BIRTH_DATETIME)),
+          RACE_CONCEPT_ID,
+          ETHNICITY_CONCEPT_ID,
+          LOCATION_ID,
+          PROVIDER_ID,
+          CARE_SITE_ID,
+          PERSON_SOURCE_VALUE,
+          GENDER_SOURCE_VALUE,
+          GENDER_SOURCE_CONCEPT_ID,
+          RACE_SOURCE_VALUE,
+          RACE_SOURCE_CONCEPT_ID,
+          ETHNICITY_SOURCE_VALUE,
+          ETHNICITY_SOURCE_CONCEPT_ID
+        )
+   WITH skip header = 1,
+        fields optionally enclosed by '"',
+        fields escaped by backslash-quote,
+        fields terminated by ','
+
+    SET work_mem to '32 MB', maintenance_work_mem to '64 MB';
