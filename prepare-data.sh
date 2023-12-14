@@ -34,6 +34,7 @@ sqlite3 -header -csv cdm.sqlite "select
 from CDM_SOURCE;" > data/eunomia/CDM_SOURCE.csv
 
 # CONCEPT
+# Requires a patch for data integirity
 sqlite3 -header -csv cdm.sqlite "select
   cast(CONCEPT_ID as integer) as CONCEPT_ID,
   CONCEPT_NAME,
@@ -46,6 +47,7 @@ sqlite3 -header -csv cdm.sqlite "select
   cast(VALID_END_DATE as integer) as VALID_END_DATE,
   INVALID_REASON
 from CONCEPT;" > data/eunomia/CONCEPT.csv
+cat patches/concept.csv >> data/eunomia/CONCEPT.csv
 
 # CONCEPT_ANCESTOR
 sqlite3 -header -csv cdm.sqlite "select
@@ -206,6 +208,7 @@ sqlite3 -header -csv cdm.sqlite "select
 from OBSERVATION_PERIOD;" > data/eunomia/OBSERVATION_PERIOD.csv
 
 # PERSON
+# Requires a patch for data integirity
 sqlite3 -header -csv cdm.sqlite "select
   cast(PERSON_ID as integer) as PERSON_ID,
   cast(GENDER_CONCEPT_ID as integer) as GENDER_CONCEPT_ID,
@@ -226,6 +229,7 @@ sqlite3 -header -csv cdm.sqlite "select
   ETHNICITY_SOURCE_VALUE,
   cast(ETHNICITY_SOURCE_CONCEPT_ID as integer) as ETHNICITY_SOURCE_CONCEPT_ID
 from PERSON;" > data/eunomia/PERSON.csv
+cat patches/person.csv >> data/eunomia/PERSON.csv
 
 # PROCEDURE_OCCURENCE
 sqlite3 -header -csv cdm.sqlite "select
