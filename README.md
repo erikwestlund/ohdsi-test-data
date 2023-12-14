@@ -24,7 +24,7 @@ is the user's home directory.
 ## Set up a PostgreSQL database.
 
 1. cd to repo `cd $HOME/ohdsi-test-data`
-2. Configure PostgreSQL instance and install other necessary tooling by running `bash configure-env.sh`
-3. Fetch the DDLs and fixture data and prepare for loading: `bash prepare-data.sh`
-4. load the data `bash load-data.sh`
+2. Configure PostgreSQL instance and install other necessary tooling by running the code in `configure-env.sh`. For now, I recommend doing this in chunks by hand as it hasn't been fully fleshed out to work non-interactively.
+3. Fetch the DDLs and fixture data and prepare for loading by running `bash prepare-data.sh`
+4. Load the data `bash load-data.sh`
 
