@@ -1,5 +1,6 @@
 LOAD CSV
-   FROM 'data/eunomia/PERSON.csv'
+   FROM ALL FILENAMES MATCHING ~<PERSON.csv>
+   IN DIRECTORY '../data/eunomia'
    HAVING FIELDS (
     PERSON_ID,
     GENDER_CONCEPT_ID,

@@ -1,5 +1,6 @@
 LOAD CSV
-   FROM 'data/eunomia/CONCEPT.csv'
+   FROM ALL FILENAMES MATCHING ~<CONCEPT.csv>
+   IN DIRECTORY '../data/eunomia'
    HAVING FIELDS (
     CONCEPT_ID,
     CONCEPT_NAME,

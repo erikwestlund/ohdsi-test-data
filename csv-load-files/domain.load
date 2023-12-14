@@ -1,5 +1,6 @@
 LOAD CSV
-   FROM 'data/eunomia/DOMAIN.csv'
+   FROM ALL FILENAMES MATCHING ~<DOMAIN.csv>
+   IN DIRECTORY '../data/eunomia'
    HAVING FIELDS (
     DOMAIN_ID,
     DOMAIN_NAME,

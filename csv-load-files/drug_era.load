@@ -1,5 +1,6 @@
 LOAD CSV
-   FROM 'data/eunomia/DRUG_ERA.csv'
+   FROM ALL FILENAMES MATCHING ~<DRUG_ERA.csv>
+   IN DIRECTORY '../data/eunomia'
    HAVING FIELDS (
     DRUG_ERA_ID,
     PERSON_ID,
