@@ -1,5 +1,5 @@
 LOAD CSV
-   FROM 'data/eunomia/DRUG_EXPOSURE.csv'
+   FROM '../data/eunomia/DRUG_EXPOSURE.csv'
    HAVING FIELDS (
       DRUG_EXPOSURE_ID,
       PERSON_ID,

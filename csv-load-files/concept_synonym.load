@@ -1,5 +1,5 @@
 LOAD CSV
-   FROM 'data/eunomia/CONCEPT_SYNONYM.csv'
+   FROM '../data/eunomia/CONCEPT_SYNONYM.csv'
    HAVING FIELDS (
     CONCEPT_ID,
     CONCEPT_SYNONYM_NAME,

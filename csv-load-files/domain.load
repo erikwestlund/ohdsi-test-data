@@ -1,5 +1,5 @@
 LOAD CSV
-   FROM 'data/eunomia/DOMAIN.csv'
+   FROM '../data/eunomia/DOMAIN.csv'
    HAVING FIELDS (
     DOMAIN_ID,
     DOMAIN_NAME,

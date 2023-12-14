@@ -1,5 +1,5 @@
 LOAD CSV
-   FROM 'data/eunomia/VOCABULARY.csv'
+   FROM '../data/eunomia/VOCABULARY.csv'
    HAVING FIELDS (
     VOCABULARY_ID,
     VOCABULARY_NAME,

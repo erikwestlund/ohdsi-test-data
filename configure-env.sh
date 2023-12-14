@@ -12,6 +12,5 @@ sudo service postgresql restart
 # Get data
 bash prepare-data.sh
 
-# scaffold database by giving postgres user access to test db
 sudo usermod -a -G $USER postgres
 

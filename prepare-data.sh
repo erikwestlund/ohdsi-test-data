@@ -10,23 +10,6 @@ tar -xvf remote/Eunomia/inst/sqlite/cdm.tar.xz
 # Get and prepare the schema for CDM 5.3
 mkdir -p sql/schema
 
-cp remote/CommonDataModel/inst/ddl/5.3/postgresql/OMOPCDM_postgresql_5.3_ddl.sql sql/schema/ddl.sql
-sed -i "s/@cdmDatabaseSchema/cdm/g" sql/schema/ddl.sql
-
-# Start with DDL only; add keys after import
-# cp remote/CommonDataModel/inst/ddl/5.3/postgresql/OMOPCDM_postgresql_5.3_primary_keys.sql sql/schema/keys.sql
-# sed -i "s/@cdmDatabaseSchema/cdm/g" sql/schema/keys.sql
-
-# cp remote/CommonDataModel/inst/ddl/5.3/postgresql/OMOPCDM_postgresql_5.3_constraints.sql sql/schema/constraints.sql
-# sed -i "s/@cdmDatabaseSchema/cdm/g" sql/schema/constraints.sql
-
-# cp remote/CommonDataModel/inst/ddl/5.3/postgresql/OMOPCDM_postgresql_5.3_indices.sql sql/schema/indices.sql
-# sed -i "s/@cdmDatabaseSchema/cdm/g" sql/schema/indices.sql
-
-# Save data to csv. Automating this is problematic as there are casting issues between the SQLite source data
-# and the correct types for the Postgres schema. Since there are only a small number of tables, the easiest
-# and most reliable thing to do is to manually select and handle the casts.
-
 # CDM_SOURCE
 sqlite3 -header -csv cdm.sqlite "select
   CDM_SOURCE_NAME,

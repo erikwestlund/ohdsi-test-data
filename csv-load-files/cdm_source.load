@@ -1,5 +1,5 @@
 LOAD CSV
-   FROM 'data/eunomia/CDM_SOURCE.csv'
+   FROM '../data/eunomia/CDM_SOURCE.csv'
    HAVING FIELDS (
      CDM_SOURCE_NAME,
      CDM_SOURCE_ABBREVIATION,
