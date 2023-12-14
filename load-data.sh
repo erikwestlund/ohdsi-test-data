@@ -38,6 +38,7 @@ sudo -u postgres psql -f sql/schema/keys.sql;
 # where no test data is provided to meet the constraints, for example
 # references to visit details
 awk '!/visit_detail/' sql/schema/constraints.sql > temp && mv temp sql/schema/constraints.sql
+awk '!/provider/' sql/schema/constraints.sql > temp && mv temp sql/schema/constraints.sql
 
 sudo -u postgres psql -f sql/schema/constraints.sql;
 sudo -u postgres psql -f sql/schema/indices.sql;
