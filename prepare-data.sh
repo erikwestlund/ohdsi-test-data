@@ -280,7 +280,7 @@ sqlite3 -header -csv cdm.sqlite "select
   DISCHARGE_TO_SOURCE_VALUE,
   cast(PRECEDING_VISIT_OCCURRENCE_ID as integer) as PRECEDING_VISIT_OCCURRENCE_ID
 from VISIT_OCCURRENCE;" > data/eunomia/VISIT_OCCURRENCE.csv
-cat patches/visit_occurrence.csv >> data/eunomia/VISIT_OCCURRENCE.csv
+# cat patches/visit_occurrence.csv >> data/eunomia/VISIT_OCCURRENCE.csv
 
 # VOCABULARY
 sqlite3 -header -csv cdm.sqlite "select
