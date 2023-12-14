@@ -1,6 +1,9 @@
-# Set Up a Dispoable PostgreSQL Database with OMOP CDM Test Data  🚀🧨🚀🧨🚀
+# Set Up a Dispoable PostgreSQL Database with OMOP CDM Test Data
 
-Requirements: An Ubuntu server. (Tested with 22.04, should work with past releases.)
+Work on OHDSI packages using a real database with synhtetic data. 🚀🧨🚀🧨🚀
+
+## Requirements
+An Ubuntu server. Tested with 22.04, should work with past releases.
 
 ## Clone the repository
 
@@ -26,3 +29,8 @@ is the user's home directory.
 3. Fetch the DDLs and fixture data and prepare for loading by running `bash prepare-data.sh`
 4. Load the data `bash load-data.sh`
 
+## Next Steps
+
+Include steps to load Synpuf data
+Support OMOP CDM 5.2, 5.4
+Reach goal: Make it easy to load as little or as much Synthea data as you want.
