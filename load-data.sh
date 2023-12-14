@@ -40,7 +40,6 @@ sudo -u postgres psql -f sql/schema/keys.sql;
 awk '!/visit_occurrence_id/' sql/schema/constraints.sql > temp && mv temp sql/schema/constraints.sql
 awk '!/visit_detail_id/' sql/schema/constraints.sql > temp && mv temp sql/schema/constraints.sql
 awk '!/provider/' sql/schema/constraints.sql > temp && mv temp sql/schema/constraints.sql
-awk '!/concept_class_id/' sql/schema/constraints.sql > temp && mv temp sql/schema/constraints.sql
 
 sudo -u postgres psql -f sql/schema/constraints.sql;
 sudo -u postgres psql -f sql/schema/indices.sql;
