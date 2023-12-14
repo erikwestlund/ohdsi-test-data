@@ -121,6 +121,7 @@ sqlite3 -header -csv cdm.sqlite "select
 from DRUG_ERA;" > data/eunomia/DRUG_ERA.csv
 
 # DRUG_EXPOSURE
+#   Eunomia has duplicates so group on DRUG_EXPOSURE_ID
 sqlite3 -header -csv cdm.sqlite "select
   cast(DRUG_EXPOSURE_ID as integer) as DRUG_EXPOSURE_ID,
   cast(PERSON_ID as integer) as PERSON_ID,
@@ -145,9 +146,10 @@ sqlite3 -header -csv cdm.sqlite "select
   cast(DRUG_SOURCE_CONCEPT_ID as integer) as DRUG_SOURCE_CONCEPT_ID,
   ROUTE_SOURCE_VALUE,
   DOSE_UNIT_SOURCE_VALUE
-from DRUG_EXPOSURE;" > data/eunomia/DRUG_EXPOSURE.csv
+from DRUG_EXPOSURE group by DRUG_EXPOSURE_ID;" > data/eunomia/DRUG_EXPOSURE.csv
 
 # MEASUREMENT
+#   Eunomia has duplicates so group on MEASUREMENT_ID
 sqlite3 -header -csv cdm.sqlite "select
   cast(MEASUREMENT_ID as integer) as MEASUREMENT_ID,
   cast(PERSON_ID as integer) as PERSON_ID,
@@ -169,9 +171,10 @@ sqlite3 -header -csv cdm.sqlite "select
   cast(MEASUREMENT_SOURCE_CONCEPT_ID as integer) as MEASUREMENT_SOURCE_CONCEPT_ID,
   UNIT_SOURCE_VALUE,
   VALUE_SOURCE_VALUE
-from MEASUREMENT;" > data/eunomia/MEASUREMENT.csv
+from MEASUREMENT group by MEASUREMENT_ID;" > data/eunomia/MEASUREMENT.csv
 
 # OBSERVATION
+#   Eunomia has duplicates so group on OBSERVATION_ID
 sqlite3 -header -csv cdm.sqlite "select
   cast(OBSERVATION_ID as integer) as OBSERVATION_ID,
   cast(PERSON_ID as integer) as PERSON_ID,
@@ -191,7 +194,7 @@ sqlite3 -header -csv cdm.sqlite "select
   cast(OBSERVATION_SOURCE_CONCEPT_ID as integer) as OBSERVATION_SOURCE_CONCEPT_ID,
   UNIT_SOURCE_VALUE,
   QUALIFIER_SOURCE_VALUE
-from OBSERVATION;" > data/eunomia/OBSERVATION.csv
+from OBSERVATION group by OBSERVATION_ID;" > data/eunomia/OBSERVATION.csv
 
 # OBSERVATION_PERIOD
 sqlite3 -header -csv cdm.sqlite "select
