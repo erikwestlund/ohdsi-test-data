@@ -9,8 +9,5 @@ sudo sed -i "s/host    all             all             127.0.0.1\/32/host    all
 sudo ufw allow 5432/tcp
 sudo service postgresql restart
 
-# Get data
-bash prepare-data.sh
-
 sudo usermod -a -G $USER postgres
 
