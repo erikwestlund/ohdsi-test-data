@@ -33,5 +33,11 @@ pgloader csv-load-files/vocabulary.load
 
 # Add constraints and indices
 sudo -u postgres psql -f sql/schema/keys.sql;
+
+# We patch some files to maintain integrity, but we will for now delete constraints
+# where no test data is provided to meet the constraints, for example
+# references to visit details
+awk '!/visit_detail/' sql/schema/constraints.sql > temp && mv temp sql/schema/constraints.sql
+
 sudo -u postgres psql -f sql/schema/constraints.sql;
 sudo -u postgres psql -f sql/schema/indices.sql;
