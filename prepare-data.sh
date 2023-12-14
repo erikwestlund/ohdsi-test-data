@@ -105,11 +105,13 @@ sqlite3 -header -csv cdm.sqlite "select
 from CONDITION_OCCURRENCE;" > data/eunomia/CONDITION_OCCURRENCE.csv
 
 # DOMAIN
+# Requires a patch for data integirity
 sqlite3 -header -csv cdm.sqlite "select
   DOMAIN_ID,
   DOMAIN_NAME,
   cast(DOMAIN_CONCEPT_ID as integer) as DOMAIN_CONCEPT_ID
 from DOMAIN;" > data/eunomia/DOMAIN.csv
+cat patches/domain.csv >> data/eunomia/DOMAIN.csv
 
 # DRUG_ERA
 sqlite3 -header -csv cdm.sqlite "select
@@ -260,7 +262,6 @@ sqlite3 -header -csv cdm.sqlite "select
 from RELATIONSHIP;" > data/eunomia/RELATIONSHIP.csv
 
 # VISIT_OCCURENCE
-# Requires a patch for data integirity
 sqlite3 -header -csv cdm.sqlite "select
   cast(VISIT_OCCURRENCE_ID as integer) as VISIT_OCCURRENCE_ID,
   cast(PERSON_ID as integer) as PERSON_ID,
@@ -280,7 +281,6 @@ sqlite3 -header -csv cdm.sqlite "select
   DISCHARGE_TO_SOURCE_VALUE,
   cast(PRECEDING_VISIT_OCCURRENCE_ID as integer) as PRECEDING_VISIT_OCCURRENCE_ID
 from VISIT_OCCURRENCE;" > data/eunomia/VISIT_OCCURRENCE.csv
-# cat patches/visit_occurrence.csv >> data/eunomia/VISIT_OCCURRENCE.csv
 
 # VOCABULARY
 sqlite3 -header -csv cdm.sqlite "select
