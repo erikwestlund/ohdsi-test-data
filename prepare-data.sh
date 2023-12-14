@@ -260,6 +260,7 @@ sqlite3 -header -csv cdm.sqlite "select
 from RELATIONSHIP;" > data/eunomia/RELATIONSHIP.csv
 
 # VISIT_OCCURENCE
+# Requires a patch for data integirity
 sqlite3 -header -csv cdm.sqlite "select
   cast(VISIT_OCCURRENCE_ID as integer) as VISIT_OCCURRENCE_ID,
   cast(PERSON_ID as integer) as PERSON_ID,
@@ -279,6 +280,7 @@ sqlite3 -header -csv cdm.sqlite "select
   DISCHARGE_TO_SOURCE_VALUE,
   cast(PRECEDING_VISIT_OCCURRENCE_ID as integer) as PRECEDING_VISIT_OCCURRENCE_ID
 from VISIT_OCCURRENCE;" > data/eunomia/VISIT_OCCURRENCE.csv
+cat patches/visit_occurence.csv >> data/eunomia/VISIT_OCCURRENCE.csv
 
 # VOCABULARY
 sqlite3 -header -csv cdm.sqlite "select
