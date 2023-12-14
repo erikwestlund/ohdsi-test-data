@@ -1,5 +1,6 @@
 LOAD CSV
-   FROM '../data/eunomia/CDM_SOURCE.csv'
+   FROM 'CDM_SOURCE.csv'
+   IN DIRECTORY '../data/eunomia'
    HAVING FIELDS (
      CDM_SOURCE_NAME,
      CDM_SOURCE_ABBREVIATION,
